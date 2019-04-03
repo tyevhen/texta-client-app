@@ -1,0 +1,109 @@
+@import "_colors";
+@import "_mixins";
+@import '_variables';
+
+.table {
+  width: 100%;
+  min-width: 1000px;
+  height: 100%;
+  background: white;
+  @include border-box();
+
+  -webkit-box-shadow: $box-shadow;
+  -moz-box-shadow: $box-shadow;
+  box-shadow: $box-shadow;
+
+  &-name {
+    padding: 25px 15px;
+    @include font-style(21px, '', .21px, 500);
+  }
+
+  &-header {
+    background: $table-background-light-grey;
+  }
+
+  &-column-title {
+    @include font-style(18px, '', .21px, 500);
+    padding: 20px 0;
+  }
+
+  &-row {
+    position: relative;
+
+    &-cell {
+      @include border-box();
+      padding: 10px;
+      height: 300px;
+      overflow-y: scroll;
+
+      &.narrow {
+        width: 15%;
+      }
+
+      &.normal {
+        width: 25%;
+      }
+
+      &.wide {
+        width: 35%;
+      }
+
+      &.odd {
+        background: $table-row-background-even;
+      }
+
+      &.even {
+        background: $table-row-background-odd;
+      }
+    }
+
+    &-delete-button {
+      position: absolute;
+      transform: translateX(5px);
+      width: 100px;
+      height: 35px;
+      margin-top: 10px;
+      border: 1px solid black;
+      border-radius: 2px;
+      cursor: pointer;
+      @include font-style(14px, 16px, .21px, 500);
+
+      &:hover {
+        background: red;
+        color: white;
+      }
+    }
+  }
+
+  &-file-upload {
+    min-height: 100px;
+    width: 100%;
+    padding: 20px;
+    background: #FFF7F7;
+    @include border-box();
+
+    label {
+      @include font-style(16px, 16px, .21px, 500);
+    }
+
+    input {
+      margin: 10px 0;
+      width: 200px;
+    }
+
+    &-button {
+      width: 130px;
+      height: 40px;
+      margin-top: 20px;
+      background: $button-blue;
+      border-radius: 2px;
+      color: white;
+      cursor: pointer;
+      @include font-style(14px, 16px, .21px, 500);
+
+      &:hover {
+        background: $button-hover-blue;
+      }
+    }
+  }
+}

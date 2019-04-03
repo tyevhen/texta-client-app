@@ -1,0 +1,19 @@
+@mixin border-box() {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+@mixin font-style($size, $line_height: '', $letter_spacing: '', $weight: 400) {
+  font-size: $size;
+  font-weight: $weight;
+
+  @if $line_height != '' {
+    line-height: $line_height;
+  }
+
+  @if $letter_spacing != '' {
+    letter-spacing: $letter_spacing;
+  }
+}
+

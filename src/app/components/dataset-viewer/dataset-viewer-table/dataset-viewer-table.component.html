@@ -1,0 +1,93 @@
+<div class="table flex-column">
+  <p
+    *ngIf="datasetName"
+    class="table-name"
+  >
+    {{ datasetName }}
+  </p>
+  <table
+    *ngIf="datasetRows !== null"
+    class="flex-center"
+  >
+    <tr
+      class="table-header"
+      *ngIf="columnNames !== null"
+    >
+      <th
+        class="table-column-title"
+        *ngFor="let name of columnNames"
+      >
+        {{ name }}
+      </th>
+    </tr>
+    <tr
+      class="table-row"
+      *ngFor="let row of datasetRows; index as idx"
+      [ngClass]="{odd: odd, even: even}"
+    >
+      <td
+        class="table-row-cell"
+        *ngFor="let name of columnNames; index as idx; odd as odd; even as even"
+        [ngClass]="{'narrow': idx === 0, 'normal': idx !== 0, 'odd': odd, 'even': even}"
+      >
+        <div
+          *ngIf="name === 'datetime'">
+          <p>
+            {{ row.content[name] | date:'medium'}}
+          </p>
+        </div>
+
+        <div
+          *ngIf="name === 'text'">
+          <p>
+            {{ row.content[name] }}
+          </p>
+        </div>
+
+        <div
+          *ngIf="name === 'texta_facts'"
+        >
+          <p *ngFor="let fact of row.content[name]">
+            {{ fact | json }}
+          </p>
+        </div>
+
+        <div
+          *ngIf="name === 'text_mlp'"
+          [ngClass]="{'narrow': idx === 2}"
+        >
+          <p>
+            {{ row.content[name] | json }}
+          </p>
+        </div>
+      </td>
+      <div
+        class="table-row-delete-button flex-center"
+        (click)="deleteDatarow.emit({rowId: row.id, setId: datasetId})"
+      >
+        Delete row
+      </div>
+    </tr>
+  </table>
+  <div
+    *ngIf="datasetName"
+    class="table-file-upload flex-column-between"
+  >
+    <label
+      [for]="mock"
+    >
+      Select mock json file to add dataset rows:
+    </label>
+    <input
+      type="file"
+      id="mock"
+      (change)="handleFileInput($event.target.files)"
+    >
+    <div
+      class="table-file-upload-button flex-center"
+      (click)="uploadDatarows.emit(constructFileUploadObject())"
+    >
+      Upload
+    </div>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+<div class="sidebar">
+  <p class="sidebar-title flex-start-center">
+    datasets
+  </p>
+  <div
+    class="sidebar-item"
+    *ngFor="let dataset of viewState"
+    (click)="datasetId.emit(dataset.id)"
+  >
+    {{ dataset.name }}
+  </div>
+  <input
+    class="sidebar-input flex-center"
+    placeholder="Enter dataset name"
+    [value]="newDatasetName"
+    (input)="newDatasetName = $event.target.value"
+  >
+  <div
+    class="sidebar-button flex-center"
+    (click)="datasetName.emit(newDatasetName);"
+  >
+    Create dataset
+  </div>
+</div>

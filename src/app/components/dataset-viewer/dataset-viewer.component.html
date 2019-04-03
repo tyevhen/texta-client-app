@@ -1,0 +1,44 @@
+<div class="viewer wrapper flex">
+  <div *ngIf="dataFetchInProgress" class="loader">
+    LOADING...
+  </div>
+  <app-dataset-viewer-sidebar
+    *ngIf="!dataFetchInProgress"
+    [viewState]="datasets"
+    (datasetId)="handleDatasetChange($event)"
+    (datasetName)="handleCreateDataset($event)"
+  >
+  </app-dataset-viewer-sidebar>
+  <app-dataset-viewer-table
+    *ngIf="(activeDataset && activeDataset.name && !datasetFetchInProgress)"
+    [datasetName]="activeDataset.name"
+    [datasetRows]="activeDataset.rows"
+    [datasetId]="activeDataset.id"
+    [columnNames]="columnNames"
+    (deleteDatarow)="handleDeleteDatarow($event)"
+    (uploadDatarows)="handleUploadDatarows($event)"
+  >
+  </app-dataset-viewer-table>
+  <ngx-smart-modal
+    #confirmRowDelete
+    [identifier]="'confirmRowDelete'"
+  >
+    <div class="modal-content">
+      <p>Are you sure you want to delete datarow?</p>
+      <div class="modal-buttons-container flex-between">
+        <button
+          (click)="confirmRowDelete.close()"
+          class="reject-button"
+        >
+          No
+        </button>
+        <button
+          (click)="onConfirmDeleteDatarow()"
+          class="confirm-button"
+        >
+          Yes, delete
+        </button>
+      </div>
+    </div>
+  </ngx-smart-modal>
+</div>

@@ -1,4 +1,5 @@
-import {Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {Component, EventEmitter, HostListener, Input, OnInit, Output} from '@angular/core';
+
 
 @Component({
   selector: 'app-dataset-viewer-table',
@@ -16,6 +17,16 @@ export class DatasetViewerTableComponent implements OnInit {
   @Output() uploadDatarows = new EventEmitter();
 
   fileToUpload: File = null;
+
+  @HostListener('window:scroll', ['$event'])
+  handleScroll() {
+    const scrollButton = document.getElementsByClassName('table-scroll-top-button')[0];
+    if (window.scrollY > 120) {
+      scrollButton.classList.add('visible');
+    } else {
+      scrollButton.classList.remove('visible');
+    }
+  }
 
   constructor() { }
 
@@ -36,5 +47,15 @@ export class DatasetViewerTableComponent implements OnInit {
 
   constructFileUploadObject() {
     return {datasetId: this.datasetId, dataset: this.constructFormDataObject()};
+  }
+
+  handleUploadFile() {
+    const fileUploadObject = this.constructFileUploadObject();
+    this.uploadDatarows.emit(fileUploadObject);
+  }
+
+  handleScrollTop() {
+    document.body.scrollIntoView({behavior: 'smooth', block: 'start'});
+    // document.documentElement.scrollTop = 0;
   }
 }

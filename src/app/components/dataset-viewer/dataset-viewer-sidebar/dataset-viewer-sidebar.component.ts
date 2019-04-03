@@ -15,7 +15,7 @@ export class DatasetViewerSidebarComponent implements OnInit {
   @Output() datasetName = new EventEmitter();
 
   @HostListener('datasetName')
-  onDatasetNamesubmit() {
+  onDatasetNameSubmit() {
     this.newDatasetName = '';
   }
 

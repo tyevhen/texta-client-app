@@ -13,13 +13,48 @@
   -moz-box-shadow: $box-shadow;
   box-shadow: $box-shadow;
 
+  &-heading {
+    width: 100%;
+  }
+
+  &-header {
+    background: $table-background-light-grey;
+    margin-top: 15px
+  }
+
   &-name {
     padding: 25px 15px;
     @include font-style(21px, '', .21px, 500);
   }
 
-  &-header {
-    background: $table-background-light-grey;
+  &-file-upload {
+    width: 100%;
+    padding-left: 20px;
+    //background: #FFF7F7;
+    @include border-box();
+
+    &-label {
+      @include font-style(14px, 16px, .21px, 400);
+    }
+
+    &-field {
+      margin-left: 30px;
+      width: 200px;
+    }
+
+    &-button {
+      width: 100px;
+      height: 35px;
+      background: $button-blue;
+      border-radius: 2px;
+      color: white;
+      cursor: pointer;
+      @include font-style(14px, 16px, .21px, 500);
+
+      &:hover {
+        background: $button-hover-blue;
+      }
+    }
   }
 
   &-column-title {
@@ -42,10 +77,6 @@
 
       &.normal {
         width: 25%;
-      }
-
-      &.wide {
-        width: 35%;
       }
 
       &.odd {
@@ -75,35 +106,21 @@
     }
   }
 
-  &-file-upload {
-    min-height: 100px;
-    width: 100%;
-    padding: 20px;
-    background: #FFF7F7;
-    @include border-box();
+  &-scroll-top-button {
+    position: fixed;
+    opacity: 0;
+    border: 1px solid silver;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    bottom: 5%;
+    right: 4%;
+    cursor: pointer;
+    background: white;
 
-    label {
-      @include font-style(16px, 16px, .21px, 500);
-    }
-
-    input {
-      margin: 10px 0;
-      width: 200px;
-    }
-
-    &-button {
-      width: 130px;
-      height: 40px;
-      margin-top: 20px;
-      background: $button-blue;
-      border-radius: 2px;
-      color: white;
-      cursor: pointer;
-      @include font-style(14px, 16px, .21px, 500);
-
-      &:hover {
-        background: $button-hover-blue;
-      }
+    &.visible {
+      opacity: 1;
+      transition: opacity .5s ease-in;
     }
   }
 }
